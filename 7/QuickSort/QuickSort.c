@@ -3,6 +3,7 @@
 
 int Partition(SeqList R, int i, int j)
 {//对R[i]...R[j]区间内的记录进行一划分排序
+	fprintf(stdout, "%d-%d\n", i, j);
 	RecType x = R[i];	//用区间的第一个记录为基准
 	while (i < j) {
 		while (i < j&& R[j].key >= x.key)
@@ -16,7 +17,7 @@ int Partition(SeqList R, int i, int j)
 			i++;	//从i所指位置起向后（右)搜索
 
 		if (i < j) {
-			R[j] = R[j];
+			R[j] = R[i];
 			j--;
 		}
 	}
@@ -29,7 +30,7 @@ void QuickSort(SeqList R, int low, int high)
 	int p; 
 	if (low < high) {//长度大于1
 		p = Partition(R, low, high);//做一次划分排序
-		fprintf(stdout, "p=%d\n", p);
+//		fprintf(stdout, "p=%d\n", p);
 		QuickSort(R, low , p-1);	//对左区间递归排序
 		QuickSort(R, p+1, high);	//对右区间递归排序
 	}
