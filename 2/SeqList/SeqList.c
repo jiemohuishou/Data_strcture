@@ -38,15 +38,15 @@ void InitList(SeqList *L, int buf[], int len)
 {
 	int i;
 	L->length = len;
-	for (i=0; i < len; i++) {
-		L->data[i] = buf[i];
+	for (i=1; i <= len; i++) {
+		L->data[i] = buf[i-1];
 	}
 }
 
 void PrintList(SeqList *L)
 {
 	int i;
-	for (i = 0; i < L->length; i++)
+	for (i = 1; i <= L->length; i++)
 		printf("%d ", L->data[i]);
 	printf("\n");
 }

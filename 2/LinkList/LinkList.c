@@ -26,7 +26,7 @@ LinkList CreateListR()
 	head = NULL;
 	rear = NULL;
 	ch  = getchar();
-	while (ch != '\n') {
+	while (ch != ' ') {
 		p = (ListNode *)malloc(sizeof(ListNode));
 		p->data = ch;
 		if(head == NULL)
@@ -132,5 +132,14 @@ DataType DeleteList(LinkList head, int i)
 		x = s->data;
 		free(s);
 		return x;
+	}
+}
+
+void PrintList(LinkList head)
+{
+	ListNode *p = head;
+	while (p != NULL) {
+		printf("%c ", p->data);
+		p = p->next;
 	}
 }

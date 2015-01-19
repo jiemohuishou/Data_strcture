@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef int DataType;
+typedef char DataType;
 typedef struct node{
 	DataType data;
 	struct node *next;
