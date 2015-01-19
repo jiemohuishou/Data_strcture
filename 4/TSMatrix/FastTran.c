@@ -30,7 +30,6 @@ void FastTran(TSMatrix *a, TSMatrix *b)
 		for (p=0; p<a->t; ++p) {
 			col = a->data[p].j;
 			q = rownext[col];
-			printf("q=%d\n", q);
 			b->data[q].i = a->data[p].j;
 			b->data[q].j = a->data[p].i;
 			b->data[q].v = a->data[p].v;
