@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "BinaryTree.h"
+#include "../../3/Stack/stack.h"
 
 // 前序遍历
 void Preorder(BinTree bt)
@@ -46,17 +47,22 @@ BinTNode *CreateTree(char *str)
 			case '(' :
 				top++;
 				St[top] = p;
+//				fprintf(stdout, "st[%d]=%c\n", top, St[top]->data);
+				fprintf(stdout, "%c %d\n", ch, top);
 				k = 1;
 				break;
 			case ')' :
 				top--;
+				fprintf(stdout, "%c %d\n", ch, top);
 				break;
 			case ',' :
 				k = 2;
+				fprintf(stdout, "%c %d\n", ch, top);
 				break;
 			default :
 				p = (BinTNode *)malloc(sizeof(BinTNode));
 				p->data = ch;
+				fprintf(stdout, "%c %d\n", ch, top);
 				p->lchild = p->rchild = NULL;
 				if (b == NULL)
 					b = p;
@@ -115,6 +121,25 @@ WWW:
 	return bt;
 }
 
+void Inorder1(BinTree bt)
+{
+	SeqStack S;
+	BinTNode *p;
+	InitStack(&S);
+	Push(&S, bt);
+
+	while(!StackEmpty(&S)) {
+		while (GetTop(&S))
+			Push(&S, GetTop(&S)->lchild);	//直到左子树为空
+		p = Pop(&S);
+		if (!StackEmpty(&S)) {
+			printf("%c", GetTop(&S)->data);	//访问根节点
+			p = Pop(&S);
+			Push(&S, p->rchild);	//右子树进栈
+		}
+	}
+}
+
 void Inorder2(BinTree bt)
 {
 	BinTNode *ST[100];
@@ -144,7 +169,7 @@ int main()
 {
 	BinTNode *tree = NULL;
 
-#if 0
+#if 1
 	char *p = "(A(B(D,E),C(,F)))";
 	//char *p = "(A(B(,D(E,F)),C))";
 	tree = CreateTree(p);
@@ -153,7 +178,7 @@ int main()
 #endif
 
 	//Preorder(tree);
-	Inorder(tree);
+	Inorder1(tree);
 	//Postorder(tree);
 	//Inorder2(tree);
 }
