@@ -3,25 +3,32 @@
 Glist CreateGList(Glist GL)
 {
 	char ch;
+	char b;
+
 	scanf("%c", &ch);
+	scanf("%c", &b);	//接收'\n'
 
 	if (ch != ' '){
 		GL = (GLNode *)malloc(sizeof(GLNode));
+		memset (GL, 0, sizeof(GLNode));
 		if (ch == '(') {
-			GL->tag = list;
+			GL->tag = 1;//list;
 			GL->slink = CreateGList(GL->slink);	//递归调用构造子表
 		} else {
-			GL->tag = atom;	//构造原子结点
+			GL->tag = 0;//atom;	//构造原子结点
 			GL->data = ch;
 		}
 	} else
 		GL = NULL;
+
 	scanf("%c", &ch);
+	scanf("%c", &b);	//接收'\n'
 	if (GL != NULL)
-		if (ch == ',')
+		if (ch == ',') {
 			GL->link = CreateGList(GL->link);	//递归构造后续广义表
-		else
+		} else {
 			GL->link = NULL;	//表示遇到')'或结束符';'时，无后续表
+		}
 	return GL;
 }
 
@@ -48,6 +55,7 @@ void PrintGList(Glist GL)
 
 void FindGlistX(Glist GL, DataType x , int *mark)
 {
+	Glist p;
 	if (GL != NULL) {
 		if (GL->tag == 0 && GL->data == x) {
 			p = GL;

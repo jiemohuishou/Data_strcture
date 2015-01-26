@@ -2,9 +2,14 @@
 #define _GLIST_H_
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
-typedef enum {atom, list} NodeTag;//atom=0，表示原子；list=1，表示子表
+typedef enum NodeTag
+{
+	atom, 
+	list
+} NodeTag;		//atom=0，表示原子；list=1，表示子表
 typedef char DataType;
 typedef struct GLNode {
 	NodeTag tag;
