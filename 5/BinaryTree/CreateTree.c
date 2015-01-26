@@ -121,6 +121,7 @@ WWW:
 	return bt;
 }
 
+/*
 void Inorder1(BinTree bt)
 {
 	SeqStack S;
@@ -139,6 +140,7 @@ void Inorder1(BinTree bt)
 		}
 	}
 }
+*/
 
 void Inorder2(BinTree bt)
 {
@@ -165,6 +167,21 @@ void TransLevel(BinTree bt)
 
 }
 
+int BinTreeDepth(BinTree bt)
+{
+	int depl, depr;
+	if (bt == NULL)
+		return 0;
+	else {
+		depl = BinTreeDepth(bt->lchild);
+		depr = BinTreeDepth(bt->rchild);
+		if (depl>depr)
+			return depl+1;
+		else
+			return depr+1;
+	}
+}
+
 int main()
 {
 	BinTNode *tree = NULL;
@@ -177,8 +194,8 @@ int main()
 	tree = CreateBinTree(tree);
 #endif
 
+	printf("depth=%d\n", BinTreeDepth(tree));
 	//Preorder(tree);
-	Inorder1(tree);
 	//Postorder(tree);
 	//Inorder2(tree);
 }
